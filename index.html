@@ -181,6 +181,23 @@
   .t-who { margin: 6px 0 0; font-size: 16px; color: var(--soft); }
   .t-who .speaker { color: var(--ink); font-weight: 600; }
   .t-who .speaker::after { content: ","; color: var(--soft); font-weight: 400; margin-right: 4px; }
+  .t-talk { margin: 12px 0 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--ink); }
+  .t-more { margin-top: 12px; border-top: 1px solid var(--rule); padding-top: 10px; }
+  .t-more summary {
+    list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 600; color: var(--indigo);
+  }
+  .t-more summary::-webkit-details-marker { display: none; }
+  .t-more summary::before {
+    content: ""; width: 7px; height: 7px; flex: none;
+    border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg); transition: transform .15s;
+  }
+  .t-more[open] summary::before { transform: rotate(45deg); }
+  .t-more summary:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .t-more .more-body { padding: 6px 0 4px; max-width: 72ch; }
+  .t-more h4 { margin: 14px 0 4px; font-size: 14px; font-weight: 600; color: var(--soft); }
+  .t-more p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--ink); }
   .tbc { font-style: normal; font-size: 13px; font-weight: 600; color: #8a5a0b; background: #fbefd9; padding: 1px 8px; border-radius: 999px; margin-left: 8px; }
 
   .mode { display: inline-block; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
@@ -300,6 +317,16 @@
         <div class="t-body"><div class="t-card">
           <div class="t-head"><h3 class="title serif">Recursive Self-Improvement</h3><span class="abbr">RSI</span><span class="mode onsite">In person</span></div>
           <p class="t-who"><span class="speaker">Yanping Huang</span><span class="aff">Renice</span></p>
+          <p class="t-talk">Recursive Self-Improvement from the Bottom Up: Why Agents Need a Search Space and a Search Algorithm</p>
+          <details class="t-more">
+            <summary>Abstract and bio</summary>
+            <div class="more-body">
+              <h4>Abstract</h4>
+              <p>Recursive self-improvement is usually discussed as a property of models, but in practice it arrived first in the systems that build and serve them. This talk follows one loop (propose, evaluate, select) from neural architecture search to today’s coding agents. Regularized evolution showed that, on the same search space, the search algorithm decides the outcome: evolution beat random search, and a single knob moved it between random and greedy. Alpa and AlpaServe showed the other half: factor the search space well, and exact solvers can search it. Their lasting impact came from disappearing into the compiler. Today’s LLM agents are the strongest proposers we have ever had, yet the self-improvement loops built on them miss both halves. They search an unbounded space of code greedily, which drifts toward random search, and they chase microbenchmark wins that don’t always carry over to the full model. Drawing on our work making compute more abundant across many models and accelerators, I will argue for putting both halves back around the model: a seam that bounds where agents may change things, and a real search algorithm on top.</p>
+              <h4>Bio</h4>
+              <p>Yanping Huang is the founder of Renice AI, which makes AI compute more abundant and available. Previously, as a research director at Google Brain and Google DeepMind, Yanping worked on large-model scaling (GPipe, GShard, GSPMD), and AutoML (regularized evolution). Yanping also worked on language models from Meena and LaMDA to GLaM, PaLM 2 and Gemini, and led inference for Bard and AI Overviews. Yanping holds a PhD from the University of Washington.</p>
+            </div>
+          </details>
         </div></div>
       </li>
       <li class="t-item">
@@ -307,6 +334,16 @@
         <div class="t-body"><div class="t-card">
           <div class="t-head"><h3 class="title serif">AI Scientist</h3><span class="abbr">AIS</span><span class="mode remote">Remote</span></div>
           <p class="t-who"><span class="speaker">Sahika Genc</span><span class="aff">AWS</span></p>
+          <p class="t-talk">Variation Kernels and Decision Policies: What Limits Discovery in LLM-Driven AI Scientists</p>
+          <details class="t-more">
+            <summary>Abstract and bio</summary>
+            <div class="more-body">
+              <h4>Abstract</h4>
+              <p>Systems such as AlphaEvolve pair a language model that proposes programs with a search that decides what to vary and what to believe. We formalize this split as a variation kernel K(x′ | x, y, c) and a decision policy π, and show that the policy cannot find what the kernel does not propose, that context operators only move mass within the kernel’s support, that first-score selection is blind to a mechanism’s ceiling, and that recombination needs separable components. Across six tasks, an evolved policy wins under noise but all decision makers tie at quality plateaus, and none of 22,973 ideas sampled from two frontier models, including their low-probability tail, passed a two-examiner non-obviousness screen. We then cast discovery adversarially: a grounded critic names the prior art each child reduces to and credits only mechanisms that are new, load-bearing under ablation and better than the seeds. The critic moves the frozen kernel further than any prompt change, but rarely past both examiners, and a kernel trained against it collapses to copying its parents, as a copy-equilibrium argument predicts. Letting the kernel test its own variants on training cases is the first intervention that moves the search: at matched work it finds better programs in three of four model–task pairs and makes recombination the stronger operator. Pairing such an experimenting mutator with an agentic critic, whose ablations and perturbation tests the harness turns into credit, produced the most robust air-traffic controller when run as isolated islands, yet no critic rated any child’s novelty above obvious. A GRPO-trained 27B LLM beats its parent on 17.7% of held-out prompts against 9.9% for the frontier model. Letting islands share what their mutators found, as descriptions and measured gains but never programs, together with a prompt that asks the mutator to inventory what it already knows, gave the best islands on average on imitation and air traffic, whereas sharing the critics’ verdicts spread mechanisms fitted to the training cases and hurt generalisation.</p>
+              <h4>Bio</h4>
+              <p>Sahika Genc, Ph.D., is a Principal Applied Scientist at Amazon working on reinforcement learning, large language models and robotics. She holds a Ph.D. in Electrical Engineering and Computer Science from the University of Michigan, Ann Arbor, and joined Amazon in 2017. She led mid- and post-training of Amazon’s agentic advertiser assistant, an s-team goal. Her training recipes combined instruction fine-tuning for campaign understanding with reinforcement learning from verifiable rewards for analytics and code generation. Before that, she led the worldwide expansion of Rufus, Amazon's generative AI shopping assistant: 8 countries and 12+ locales in 5 languages, delivered weeks ahead of schedule. Her work there covered cross-lingual instruction fine-tuning, direct preference optimization and graph-based RAG. In Amazon Search, she led whole-page optimization using multi-agent reinforcement learning and bandit-based multivariate testing. She began at AWS, where she co-created AWS DeepRacer, Amazon's first autonomous robotics platform for deep reinforcement learning. DeepRacer remained re:Invent's flagship robotics showcase through 2024.</p>
+            </div>
+          </details>
         </div></div>
       </li>
       <li class="t-item">
@@ -321,6 +358,16 @@
         <div class="t-body"><div class="t-card">
           <div class="t-head"><h3 class="title serif">Computer Usage Agent</h3><span class="abbr">CuA</span><span class="mode remote">Remote</span></div>
           <p class="t-who"><span class="speaker">Daniel Fried</span><span class="aff">Carnegie Mellon University</span></p>
+          <p class="t-talk">At What Cost? Evaluating Computer Use Agents Beyond Success</p>
+          <details class="t-more">
+            <summary>Abstract and bio</summary>
+            <div class="more-body">
+              <h4>Abstract</h4>
+              <p>An agent that completes a task in 30 seconds is not the same as one that takes 30 minutes. And an agent that succeeds on its own is not the same as one that succeeds only after extensive human steering. Yet many agent evaluations collapse these differences into the same success score. In this talk, I’ll argue that we should evaluate not just whether agents succeed, but the cost of getting there—across outcome quality, machine effort, and human effort.</p>
+              <h4>Bio</h4>
+              <p>Daniel Fried is an assistant professor in the Language Technologies Institute, School of Computer Science at Carnegie Mellon University. His research in natural language processing and machine learning focuses on enabling people and AI systems to communicate and collaborate on tasks such as writing code, using computers and the web, and reasoning. Previously, he was a postdoc at Meta AI and the University of Washington and completed a PhD at UC Berkeley. His research has been supported by an NSF CAREER Award, a Microsoft Faculty Fellowship, and an Okawa Research Award.</p>
+            </div>
+          </details>
         </div></div>
       </li>
       <li class="t-item">
@@ -328,6 +375,16 @@
         <div class="t-body"><div class="t-card">
           <div class="t-head"><h3 class="title serif">Agentic Memory</h3><span class="mode onsite">In person</span></div>
           <p class="t-who"><span class="speaker">Chenyan Xiong</span><span class="aff">Carnegie Mellon University</span></p>
+          <p class="t-talk">Beyond the Memory Wall: Training Language Models to Be Native to the Modern Memory System</p>
+          <details class="t-more">
+            <summary>Abstract and bio</summary>
+            <div class="more-body">
+              <h4>Abstract</h4>
+              <p>Language models increasingly need far more than fits in GPU memory: long-horizon agents accumulate ever-growing contexts, repeatedly read the same documents and codebases, and model capacity itself keeps outgrowing accelerator memory. The usual answer treats this as a systems problem. In this talk, I’ll present our recent efforts toward models that are co-designed with the modern memory system, where decisions about what to keep on-device, what to store externally, and when to bring it back are built into the model itself. I will first discuss how agents can learn to manage their own context: compressing redundant history, offloading key information to external storage, and retrieving it when needed, so that short-term and long-term memory work in concert. I will then show how localized attention over documents and codebases allows their KV caches to be compiled once offline and reused across contexts. Finally, I will introduce a hardware-native, prefetchable mixture-of-experts architecture, in which hash-based routing determines each token’s experts ahead of computation, allowing most expert parameters to reside on SSD without stalling inference. I will conclude by discussing how this perspective opens a path toward scaling model memory and capacity with storage rather than GPU memory.</p>
+              <h4>Bio</h4>
+              <p>Chenyan Xiong is an Associate Professor at the Language Technologies Institute, School of Computer Science, Carnegie Mellon University, and is affiliated with the Machine Learning Department. He co-founded and co-leads the CMU Foundation and Language Model Center (FLAME). Previously, he was a researcher at Microsoft Research Redmond (2018–2023), working on conversational search, dense retrieval, and large-scale pretraining, with scientific and production impact at scale. He received his Ph.D. from Carnegie Mellon University in 2018. His current research focuses on foundation and large language models, agentic AI, AI for scientific research, and healthcare intelligence.</p>
+            </div>
+          </details>
         </div></div>
       </li>
       <li class="t-item">
