@@ -181,6 +181,7 @@
   .t-who { margin: 6px 0 0; font-size: 16px; color: var(--soft); }
   .t-who .speaker { color: var(--ink); font-weight: 600; }
   .t-who .speaker::after { content: ","; color: var(--soft); font-weight: 400; margin-right: 4px; }
+  .t-who .speaker.no-comma::after { content: none; }
   .t-talk { margin: 12px 0 0; font-size: 17px; font-weight: 600; line-height: 1.4; color: var(--ink); }
   .t-more { margin-top: 12px; border-top: 1px solid var(--rule); padding-top: 10px; }
   .t-more summary {
@@ -198,6 +199,7 @@
   .t-more .more-body { padding: 6px 0 4px; max-width: 72ch; }
   .t-more h4 { margin: 14px 0 4px; font-size: 14px; font-weight: 600; color: var(--soft); }
   .t-more p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--ink); }
+  .t-more p.p-next { margin-top: 10px; }
   .tbc { font-style: normal; font-size: 13px; font-weight: 600; color: #8a5a0b; background: #fbefd9; padding: 1px 8px; border-radius: 999px; margin-left: 8px; }
 
   .mode { display: inline-block; font-size: 13px; font-weight: 600; padding: 2px 10px; border-radius: 999px; }
@@ -391,7 +393,18 @@
         <div class="t-time">11:30 AM–12:00 PM</div>
         <div class="t-body"><div class="t-card">
           <div class="t-head"><h3 class="title serif">Governance</h3><span class="mode remote">Remote</span></div>
-          <p class="t-who"><span class="speaker">John Tristan</span><span class="aff">AWS</span><em class="tbc">To be confirmed</em></p>
+          <p class="t-who"><span class="speaker no-comma">John Tristan</span> and <span class="speaker">Jatin Arora</span><span class="aff">AWS</span></p>
+          <p class="t-talk">Dogwood: temporal policies for governing agent tool calls</p>
+          <details class="t-more">
+            <summary>Abstract and bio</summary>
+            <div class="more-body">
+              <h4>Abstract</h4>
+              <p>Dogwood is an open source policy language for governing the actions of agents. A key feature of the language is support for temporal policies, which decide whether a tool call is allowed based on the events that occurred earlier in the agent's run. A Dogwood policy can require that certain past actions have or have not occurred, impose constraints on the outcomes of those actions, and restrict their order and timing. For instance, Dogwood lets a deployer write a policy that permits a refund only if the agent looked up the order within the last 24 hours and the refund is at most the amount the lookup reported as paid.</p>
+              <p class="p-next">This talk describes the language and the engine that enforces it. We start with the foundation of Dogwood, a metric first-order temporal logic, and explain how its operators let a policy look back from the current request over a bounded window and compare the contents of past events. We then describe how the engine evaluates these policies. It factors the temporal clauses out of each policy, leaving a stateless Cedar policy, and evaluates each clause as an operation on a table of events. This correspondence lets us compile temporal clauses to SQL and evaluate each request in a single database transaction that records the event and decides it, so that evaluation is atomic, isolated, and durable even as many agents extend a shared history. Dogwood is used in two products today, AgentCore Policy and Strands Box, and we describe how these settings differ. We conclude with the research problems we are working on in Dogwood: policy synthesis and analysis, liveness properties, and a verified compiler.</p>
+              <h4>Bio: Jatin Arora</h4>
+              <p>Jatin Arora works at the intersection of AI and formal methods, building systems that make AI-generated code provably correct. At Amazon, he designed and shipped Kiro's bug-fixing workflow, now used daily by more than 700 developers. He holds a PhD in programming languages and formal methods from Carnegie Mellon University, with research published at POPL, PLDI, and FMCAD.</p>
+            </div>
+          </details>
         </div></div>
       </li>
       <li class="t-item break">
