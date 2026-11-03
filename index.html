@@ -98,6 +98,8 @@
     transition: background .15s;
   }
   .rsvp-btn:hover { background: #f0b552; }
+  .rsvp-btn.closed { background: rgba(255,255,255,.12); color: #c8cfea; cursor: default; }
+  .rsvp-btn.closed:hover { background: rgba(255,255,255,.12); }
   .rsvp-note { margin: 14px 0 0; font-size: 14px; color: #9ea9d6; }
 
   /* ---------- Section heading ---------- */
@@ -280,18 +282,17 @@
       <div class="fact"><b>Date</b><span>Tuesday, November 3, 2026</span></div>
       <div class="fact"><b>Time</b><span>9:00 AM–12:30 PM PT</span></div>
       <div class="fact"><b>Location</b><span><a class="fact-link" href="#where">In person</a> or <a class="fact-link" href="#zoom">Zoom</a></span></div>
-      <!-- After hosting, replace rsvp.html with the full internal RSVP URL -->
-      <a class="rsvp-btn" href="rsvp.html">RSVP</a>
+      <span class="rsvp-btn closed" aria-disabled="true">Registration closed</span>
     </div>
-    <p class="rsvp-note">Registration is open to Amazon employees.</p>
+    <p class="rsvp-note">This symposium took place on November 3, 2026.</p>
   </div>
 </header>
 
 <main class="wrap">
   <section id="where" aria-labelledby="where-h">
     <div class="sec-head">
-      <h2 id="where-h" class="serif">Where to join</h2>
-      <p>Join in person in Santa Clara, or online over Zoom.</p>
+      <h2 id="where-h" class="serif">Venue</h2>
+      <p>The symposium was held in person in Santa Clara and online over Zoom.</p>
     </div>
     <div class="venues">
       <div class="venue">
@@ -300,8 +301,8 @@
       </div>
       <div class="venue online" id="zoom">
         <h3 class="site serif">Zoom</h3>
-        <p class="room">Join remotely from anywhere.</p>
-        <span class="seats"><a href="https://amazon.zoom.us/j/96006638354?pwd=TeUldZ4uYtILFj1Ba8mMU6MmefBNzI.1" target="_blank" rel="noopener">Join on Zoom</a></span>
+        <p class="room">Remote attendees joined over Zoom.</p>
+        <span class="seats pending">This event has ended</span>
       </div>
     </div>
   </section>

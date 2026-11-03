@@ -200,6 +200,9 @@
   .fact-link { color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,.4); text-underline-offset: 3px; }
   .fact-link:hover { text-decoration-color: var(--saffron); }
   @media (max-width: 720px) { .br-wide { display: none; } }
+  .closed-msg { text-align: center; padding: 12px 0; }
+  .closed-msg p { color: var(--soft); margin: 8px 0 0; }
+  .closed-msg a { color: var(--indigo); }
 </style>
 </head>
 <body>
@@ -221,157 +224,16 @@
 
 <main class="wrap">
   <div class="card">
-    <div id="formArea">
-      <h2 class="serif">Register to attend</h2>
-      <p class="intro">Registration is open to Amazon employees. Please use your Amazon email address.</p>
-
-      <form id="rsvpForm" novalidate>
-        <div class="group" role="group" aria-label="About you">
-          <h3 class="legend">About you</h3>
-          <div class="two">
-            <div class="field" id="f-name">
-              <label for="name">Full name</label>
-              <input type="text" id="name" name="name" autocomplete="name">
-              <div class="error-msg">Enter your name.</div>
-            </div>
-            <div class="field" id="f-email">
-              <label for="email">Amazon email</label>
-              <input type="email" id="email" name="email" placeholder="alias@amazon.com">
-              <div class="error-msg">Use an @amazon.com address.</div>
-            </div>
-          </div>
-          <div class="field">
-            <label for="team">Team or organization <span class="opt">Optional</span></label>
-            <input type="text" id="team" name="team">
-          </div>
-        </div>
-
-        <div class="group" role="group" aria-label="How will you join?">
-          <h3 class="legend">How will you join?</h3>
-          <div class="field" id="f-attend">
-            <div class="choices">
-              <label class="choice"><input type="radio" name="attendance" value="In person: SJC38"><span>In person<small>SJC38, Room: 01.101</small></span></label>
-              <label class="choice"><input type="radio" name="attendance" value="Zoom"><span>Zoom<small>Join remotely</small></span></label>
-            </div>
-            <div class="error-msg">Choose one option.</div>
-          </div>
-          <div class="field">
-            <span class="q">Sessions of interest <span class="opt">Optional</span></span>
-            <div class="chips">
-              <label class="chip"><input type="checkbox" name="interests" value="Recursive Self-Improvement"><span>Recursive Self-Improvement</span></label>
-              <label class="chip"><input type="checkbox" name="interests" value="AI Scientist"><span>AI Scientist</span></label>
-              <label class="chip"><input type="checkbox" name="interests" value="Computer Usage Agent"><span>Computer Usage Agent</span></label>
-              <label class="chip"><input type="checkbox" name="interests" value="Agentic Memory"><span>Agentic Memory</span></label>
-              <label class="chip"><input type="checkbox" name="interests" value="Governance"><span>Governance</span></label>
-            </div>
-          </div>
-        </div>
-
-        <div class="group" role="group" aria-label="Anything else">
-          <h3 class="legend">Anything else</h3>
-          <div class="field">
-            <label for="notes">Questions or comments <span class="opt">Optional</span></label>
-            <textarea id="notes" name="notes"></textarea>
-          </div>
-        </div>
-
-        <!-- Spam trap: hidden from people, bots tend to fill it in -->
-        <div class="hp" aria-hidden="true">
-          <label for="website">Website</label>
-          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <p class="submit-error" id="submitError" role="alert"></p>
-        <div class="actions">
-          <p>All fields are required unless marked optional.</p>
-          <button type="submit" id="submitBtn">Register</button>
-        </div>
-      </form>
-    </div>
-
-    <div class="done" id="doneArea" role="status">
-      <div class="mark" aria-hidden="true">✓</div>
-      <h2 class="serif">You're registered</h2>
-      <p>Thank you. We look forward to seeing you on November 3.</p>
-      <p><a href="index.html">View the schedule</a></p>
+    <div class="closed-msg" role="status">
+      <h2 class="serif">Registration is closed</h2>
+      <p>This symposium took place on November 3, 2026. Thank you to everyone who registered and attended.</p>
+      <p><a href="index.html">View the program</a></p>
     </div>
   </div>
 </main>
 
 <footer>AWS Research Symposium on Future Agentic AI Systems and Applications · Webmaster: Aaron Chen</footer>
 
-<script>
-  // ---- Configuration ----
-  // Google Apps Script web app URL that writes each registration to the Google Sheet.
-  // Leave empty for local testing: registrations are then only printed to the
-  // browser console (F12, Console tab) and nothing is saved.
-  const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbymNzKcX9mlNpkx-wLmYopXLCspqNDn2QmLDCJmY51fvqJyokX-X2FgkgG6Vxihr0LKwg/exec";
-
-  const form = document.getElementById("rsvpForm");
-  const btn = document.getElementById("submitBtn");
-  const errBox = document.getElementById("submitError");
-
-  function setInvalid(id, bad) {
-    document.getElementById(id).classList.toggle("invalid", bad);
-    return bad;
-  }
-  function showError(msg) {
-    errBox.textContent = msg;
-    errBox.classList.toggle("show", !!msg);
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    showError("");
-    const data = new FormData(form);
-    const name = (data.get("name") || "").trim();
-    const email = (data.get("email") || "").trim().toLowerCase();
-    const attendance = data.get("attendance");
-
-    let bad = false;
-    bad = setInvalid("f-name", !name) || bad;
-    bad = setInvalid("f-email", !/^[^\s@]+@amazon\.com$/.test(email)) || bad;
-    bad = setInvalid("f-attend", !attendance) || bad;
-    if (bad) return;
-
-    const payload = {
-      name,
-      email,
-      team: (data.get("team") || "").trim(),
-      attendance,
-      interests: data.getAll("interests"),
-      notes: (data.get("notes") || "").trim(),
-      website: (data.get("website") || "").trim()
-    };
-
-    if (SUBMIT_URL) {
-      btn.disabled = true;
-      btn.textContent = "Registering…";
-      try {
-        // text/plain keeps this a "simple" request, so the browser sends it
-        // straight to Apps Script without a CORS preflight.
-        const res = await fetch(SUBMIT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload)
-        });
-        const out = await res.json();
-        if (!out.ok) throw new Error(out.error || "rejected");
-      } catch (err) {
-        btn.disabled = false;
-        btn.textContent = "Register";
-        showError("Your registration could not be sent. Check your connection and try again. If it keeps failing, contact the organizing team.");
-        return;
-      }
-    } else {
-      console.log("[Local test] Registration:", payload);
-    }
-
-    document.getElementById("formArea").style.display = "none";
-    document.getElementById("doneArea").style.display = "block";
-    document.querySelector(".card").scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-</script>
 
 </body>
 </html>
