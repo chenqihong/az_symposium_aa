@@ -278,7 +278,7 @@
     </ul>
     <div class="facts">
       <div class="fact"><b>Date</b><span>Tuesday, November 3, 2026</span></div>
-      <div class="fact"><b>Time</b><span>9:00 AM–12:00 PM PT</span></div>
+      <div class="fact"><b>Time</b><span>9:00 AM–12:30 PM PT</span></div>
       <div class="fact"><b>Location</b><span><a class="fact-link" href="#where">In person</a> or <a class="fact-link" href="#zoom">Zoom</a></span></div>
       <!-- After hosting, replace rsvp.html with the full internal RSVP URL -->
       <a class="rsvp-btn" href="rsvp.html">RSVP</a>
@@ -312,7 +312,7 @@
       <p>All times are Pacific Time. Each talk is marked by whether the speaker presents in person or remotely.</p>
     </div>
 
-    <div class="block-head"><h3 class="serif">Invited Talks</h3><span>9:00 AM–12:00 PM PT</span></div>
+    <div class="block-head"><h3 class="serif">Invited Talks</h3><span>9:00 AM–12:30 PM PT</span></div>
     <ol class="timeline">
       <li class="t-item">
         <div class="t-time">9:00–9:30 AM</div>
@@ -351,8 +351,19 @@
       <li class="t-item">
         <div class="t-time">10:00–10:30 AM</div>
         <div class="t-body"><div class="t-card">
-          <div class="t-head"><h3 class="title serif">TBD</h3><span class="mode remote">Remote</span></div>
-          <p class="t-who"><span class="speaker">Stefano Soatto</span><span class="aff">AWS</span></p>
+          <div class="t-head"><h3 class="title serif">Governance</h3><span class="mode remote">Remote</span></div>
+          <p class="t-who"><span class="speaker no-comma">John Tristan</span> and <span class="speaker">Jatin Arora</span><span class="aff">AWS</span></p>
+          <p class="t-talk">Dogwood: temporal policies for governing agent tool calls</p>
+          <details class="t-more">
+            <summary>Abstract and bio</summary>
+            <div class="more-body">
+              <h4>Abstract</h4>
+              <p>Dogwood is an open source policy language for governing the actions of agents. A key feature of the language is support for temporal policies, which decide whether a tool call is allowed based on the events that occurred earlier in the agent's run. A Dogwood policy can require that certain past actions have or have not occurred, impose constraints on the outcomes of those actions, and restrict their order and timing. For instance, Dogwood lets a deployer write a policy that permits a refund only if the agent looked up the order within the last 24 hours and the refund is at most the amount the lookup reported as paid.</p>
+              <p class="p-next">This talk describes the language and the engine that enforces it. We start with the foundation of Dogwood, a metric first-order temporal logic, and explain how its operators let a policy look back from the current request over a bounded window and compare the contents of past events. We then describe how the engine evaluates these policies. It factors the temporal clauses out of each policy, leaving a stateless Cedar policy, and evaluates each clause as an operation on a table of events. This correspondence lets us compile temporal clauses to SQL and evaluate each request in a single database transaction that records the event and decides it, so that evaluation is atomic, isolated, and durable even as many agents extend a shared history. Dogwood is used in two products today, AgentCore Policy and Strands Box, and we describe how these settings differ. We conclude with the research problems we are working on in Dogwood: policy synthesis and analysis, liveness properties, and a verified compiler.</p>
+              <h4>Bio: Jatin Arora</h4>
+              <p>Jatin Arora works at the intersection of AI and formal methods, building systems that make AI-generated code provably correct. At Amazon, he designed and shipped Kiro's bug-fixing workflow, now used daily by more than 700 developers. He holds a PhD in programming languages and formal methods from Carnegie Mellon University, with research published at POPL, PLDI, and FMCAD.</p>
+            </div>
+          </details>
         </div></div>
       </li>
       <li class="t-item">
@@ -392,23 +403,30 @@
       <li class="t-item">
         <div class="t-time">11:30 AM–12:00 PM</div>
         <div class="t-body"><div class="t-card">
-          <div class="t-head"><h3 class="title serif">Governance</h3><span class="mode remote">Remote</span></div>
-          <p class="t-who"><span class="speaker no-comma">John Tristan</span> and <span class="speaker">Jatin Arora</span><span class="aff">AWS</span></p>
-          <p class="t-talk">Dogwood: temporal policies for governing agent tool calls</p>
+          <div class="t-head"><h3 class="title serif">AI Agents as Universal Task Solvers</h3><span class="mode remote">Remote</span></div>
+          <p class="t-who"><span class="speaker">Alessandro Achille</span><span class="aff">AWS</span></p>
+        </div></div>
+      </li>
+      <li class="t-item">
+        <div class="t-time">12:00–12:30 PM</div>
+        <div class="t-body"><div class="t-card">
+          <div class="t-head"><h3 class="title serif">The Observability Gap in AI Agents</h3><span class="mode remote">Remote</span></div>
+          <p class="t-who"><span class="speaker">Eric Mibuari</span><span class="aff">Partnership on AI</span></p>
           <details class="t-more">
             <summary>Abstract and bio</summary>
             <div class="more-body">
               <h4>Abstract</h4>
-              <p>Dogwood is an open source policy language for governing the actions of agents. A key feature of the language is support for temporal policies, which decide whether a tool call is allowed based on the events that occurred earlier in the agent's run. A Dogwood policy can require that certain past actions have or have not occurred, impose constraints on the outcomes of those actions, and restrict their order and timing. For instance, Dogwood lets a deployer write a policy that permits a refund only if the agent looked up the order within the last 24 hours and the refund is at most the amount the lookup reported as paid.</p>
-              <p class="p-next">This talk describes the language and the engine that enforces it. We start with the foundation of Dogwood, a metric first-order temporal logic, and explain how its operators let a policy look back from the current request over a bounded window and compare the contents of past events. We then describe how the engine evaluates these policies. It factors the temporal clauses out of each policy, leaving a stateless Cedar policy, and evaluates each clause as an operation on a table of events. This correspondence lets us compile temporal clauses to SQL and evaluate each request in a single database transaction that records the event and decides it, so that evaluation is atomic, isolated, and durable even as many agents extend a shared history. Dogwood is used in two products today, AgentCore Policy and Strands Box, and we describe how these settings differ. We conclude with the research problems we are working on in Dogwood: policy synthesis and analysis, liveness properties, and a verified compiler.</p>
-              <h4>Bio: Jatin Arora</h4>
-              <p>Jatin Arora works at the intersection of AI and formal methods, building systems that make AI-generated code provably correct. At Amazon, he designed and shipped Kiro's bug-fixing workflow, now used daily by more than 700 developers. He holds a PhD in programming languages and formal methods from Carnegie Mellon University, with research published at POPL, PLDI, and FMCAD.</p>
+              <p>As AI agents move into regulated industries like banking and healthcare, the tools that should be monitoring them have critical blind spots. Continuous monitoring is an essential safeguard, as a growing number of incidents show agents taking unauthorized actions that testing could not anticipate. However, the infrastructure for monitoring agents does not yet reliably exist, though policymakers assume it does. Our paper assesses four widely used agent frameworks against six monitoring goals. It examines whether these frameworks produce the records that enterprises need to monitor agents in real time and to review and adjust the agents’ decisions afterward. We found six gaps in the telemetry that agent frameworks emit. Taken together, they leave enterprises unable to reliably trace an agent’s authority, how it changed, and why the agent acted as it did. Closing these gaps requires coordinated action across framework developers, model providers, enterprises, and regulators.</p>
+              <h4>Bio</h4>
+              <p>Eric Mibuari, PhD, is the AI Safety Research Scientist at Partnership on AI, where his role focuses on technical governance of advanced AI systems. He conducts research to understand how different safety approaches work in practice and proposes ways to implement them effectively.</p>
+              <p class="p-next">Prior to PAI, he was postdoctoral research fellow in Computer Science at Harvard University, where he also earned a PhD in Computer Science, advised by Prof. David Parkes in the Economics and Computation Research Group. His academic research has focused on AI safety and its intersection with markets. His PhD was focused on finding and creating the conditions under which the benefits of AI are preserved or even enhanced while the tendency to diminish welfare is contained to the greatest possible extent. Some of his work has tackled problems such as AI bias in lending algorithms, and AI algorithmic collusion, first in automatic pricing on e-commerce platforms, then in battery storage optimization in electricity power markets. He has published papers at top AI venues such as NeurIPS, where he demonstrated that reinforcement learning (RL) and a game-theoretic framework can be used to prevent tacit AI collusion on online e-commerce platforms. Prior to his PhD, Eric worked as a research scientist at IBM Research in Nairobi, Kenya where he was the founding research scientist. Eric holds a bachelor’s in Aerospace Engineering from MIT, and masters in Computer Science from Stanford University.</p>
+              <p class="p-next">Eric enjoys traveling, learning different languages, and running, and is an amateur winemaker.</p>
             </div>
           </details>
         </div></div>
       </li>
       <li class="t-item break">
-        <div class="t-time">12:00–2:00 PM</div>
+        <div class="t-time">12:30–2:00 PM</div>
         <div class="t-body"><div class="t-card">
           <div class="t-head"><h3 class="title serif">Lunch</h3></div>
         </div></div>
